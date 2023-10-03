@@ -1,6 +1,3 @@
-
-
-
 class Item{
   constructor(item){
     this.nombre = item.nombre;
@@ -23,7 +20,6 @@ class Item{
 }
 
 
-//error
 /*
 let eventoCompra = document.getElementById("eventoCompra");
 eventoCompra.addEventListener('click', () => {
@@ -37,18 +33,17 @@ eventoCompra.addEventListener('click', () => {
 */
 
 
-
-// Datos de la compra del item
+//datos de la compra
 let mensaje = document.getElementById("mensaje");
-// formulario
+//formulario
 let FormProduc = document.getElementById("FormProduc");
-// Seccion de todos los productos
+//Seccion de todos los productos
 let totalProduc = document.getElementById("totalProduc");
 FormProduc.addEventListener("submit",crearProduc);
-// Variable Global
+//Variable Global
 let listaProduc;
 let stotageList;
-// falsy
+//falsy
 listaProduc = JSON.parse(localStorage.getItem("listaProduc")) || [];
 const cards = document.getElementById("cards");
 const checkoutButton = document.getElementById("checkoutButton");
@@ -67,15 +62,13 @@ function buyPlan(nombre, precio, descripcion) {
 }
 
 
-
 //ARREGLADO
 checkoutButton.addEventListener("click", () => {
-  // Implementa la lógica para procesar el pedido aquí
-  // Puedes acceder a los elementos del carrito desde localStorage
+  //proceso del pedido
+  //acceso a los elementos del carrito desde localStorage
   const comprasUsers = JSON.parse(localStorage.getItem("comprasUsers")) || [];
   if (comprasUsers.length === 0) {
-    //alert("El carrito está vacío. Agrega planes antes de realizar el pedido.");
-    //alerta sweetalert
+    //alert sweetalert ("El carrito está vacío. Agrega planes antes de realizar el pedido.");
     Swal.fire( {
       icon: 'error',
       title: '¡Error!',
@@ -83,9 +76,10 @@ checkoutButton.addEventListener("click", () => {
       footer: '<a>Favor agrega nuevos productos al carro de compras.</a>'
     })
   } else {
+    //limpiar carrito despues de la compra
     localStorage.removeItem("comprasUsers");
     cards.innerHTML = "";
-    //alerta sweetalert
+    //alerta sweetalert pedido realizado
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -93,10 +87,6 @@ checkoutButton.addEventListener("click", () => {
       showConfirmButton: false,
       timer: 2000
     })
-    // Realiza la lógica para procesar el pedido, por ejemplo, enviar los datos al servidor, etc.
-    //    alert("Pedido realizado con éxito");
-    // Limpia el carrito después de realizar el pedido
-
   }
 });
 
@@ -137,6 +127,7 @@ const nuevoProduc = (item) =>{
   tipoPrecio.value = "";
   tipoDescripcion.value = "";
   //Mensaje producto guardado
+  //Se borran datos en los campos de textos
   Swal.fire({
     title: '¡Producto guardado con Éxito!',
     text: 'Los campos llenos se borrarán',
@@ -156,7 +147,7 @@ const nuevoProduc = (item) =>{
 
 
 function crearProduc(e){
-  // Inputs
+  //Inputs
   let tipoProduc = document.getElementById("tipoProduc").value;
   let tipoPrecio = document.getElementById("tipoPrecio").value;
   let tipoDescripcion = document.getElementById("tipoDescripcion").value;
@@ -169,24 +160,22 @@ function crearProduc(e){
   nuevoProduc(item);
 }
 
-// Función para borrar todo el contenido del localStorage
+//Función para borrar todo el contenido del localStorage y HTML/DOM
+//cargar pagina web reload
 function clearLocalStorage() {
   localStorage.clear();
   totalProduc.innerHTML = "";
   location.reload();
-  // También puedes agregar un mensaje de confirmación si lo deseas
-  alert("El contenido del localStorage se ha borrado correctamente.");
+  //borrar base de datos completamente
+  alert("El contenido de la base de datos se a eliminado por completo.");
 }
-// Puedes agregar un evento para llamar a esta función cuando sea necesario
-// Por ejemplo, puedes agregar un botón en tu HTML y vincularlo a esta función
+//llamar la funcion2
 document.getElementById("clearLocalStorageButton").addEventListener("click", clearLocalStorage);
-
+//llamar la funcion1
 /*
 const clearLocalStorageButton = document.getElementById("clearLocalStorageButton");
 clearLocalStorageButton.addEventListener("click", clearLocalStorage);
 */
-
-
 
 
 verProductos();
