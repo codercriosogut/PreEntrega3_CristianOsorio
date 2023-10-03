@@ -85,7 +85,7 @@ checkoutButton.addEventListener("click", () => {
       icon: 'success',
       title: 'El pedido se ha realizado con éxito!',
       showConfirmButton: false,
-      timer: 2000
+      timer: 3000
     })
   }
 });
@@ -175,7 +175,50 @@ document.getElementById("clearLocalStorageButton").addEventListener("click", cle
 /*
 const clearLocalStorageButton = document.getElementById("clearLocalStorageButton");
 clearLocalStorageButton.addEventListener("click", clearLocalStorage);
-*/
 
+
+
+//ver3
+/*
+// Función clearLocalStorage
+function clearLocalStorage() {
+  localStorage.clear();
+  totalProduc.innerHTML = "";
+  location.reload();
+}
+
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+});
+
+swalWithBootstrapButtons.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, cancel!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+    clearLocalStorage();
+    swalWithBootstrapButtons.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    );
+  } else if (result.dismiss === Swal.DismissReason.cancel) {
+    swalWithBootstrapButtons.fire(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    );
+  }
+});
+*/
 
 verProductos();
